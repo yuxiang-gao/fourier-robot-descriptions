@@ -1,6 +1,6 @@
 [project]
 name = "fourier-robot-descriptions"
-version = "0.2.0"
+version = "0.2.1"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -13,20 +13,16 @@ dependencies = [
 
 [project.optional-dependencies]
 yourdfpy = ["yourdfpy>=0.0.57"]
+examples = [
+    "yourdfpy>=0.0.57",
+    "meshcat>=0.3.2",
+    "meshcat-shapes>=0.3.0",
+]
 
 [build-system]
 requires = ["hatchling", "hatchling[dev]"]
 build-backend = "hatchling.build"
 
-
-[tool.uv.sources]
-pin = { index = "tuna" }
-gitpython = { index = "tuna" }
-tqdm = { index = "tuna" }
-rich = { index = "tuna" }
-yourdfpy = { index = "tuna" }
-ruff = { index = "tuna" }
-pyright = { index = "tuna" }
 
 [[tool.uv.index]]
 name = "tuna"

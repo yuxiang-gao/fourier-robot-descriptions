@@ -14,7 +14,26 @@ import pinocchio as pin
 
 from fourier_robot_descriptions.fourier import PACKAGE_PATH, REPOSITORY_PATH
 
-from .._package_dirs import get_package_dirs
+
+def get_package_dirs(PACKAGE_PATH: str, REPOSITORY_PATH: str, URDF_PATH: str) -> list[str]:
+    """Get package directories
+
+    Args:
+        PACKAGE_PATH: Path to the package directory.
+        REPOSITORY_PATH: Path to the repository directory.
+        URDF_PATH: Path to the URDF file.
+
+    Returns:
+        Package directories.
+    """
+    return [
+        PACKAGE_PATH,
+        REPOSITORY_PATH,
+        os.path.dirname(PACKAGE_PATH),
+        os.path.dirname(REPOSITORY_PATH),
+        os.path.dirname(URDF_PATH),
+    ]
+
 
 PinocchioJoint = Union[  # noqa: UP007
     pin.JointModelRX,
@@ -22,7 +41,7 @@ PinocchioJoint = Union[  # noqa: UP007
     pin.JointModelRZ,
     pin.JointModelPX,
     pin.JointModelPY,
-    pin.JointModelPrismatic,
+    pin.JointModelPZ,
     pin.JointModelFreeFlyer,
     pin.JointModelSpherical,
     pin.JointModelSphericalZYX,
@@ -49,10 +68,10 @@ def load_robot_description(
     Returns:
         Robot model for Pinocchio.
     """
-    URDF_PATH = str(PACKAGE_PATH / f"{description_name}.urdf")
+    URDF_PATH = str(REPOSITORY_PATH / "urdf" / f"{description_name}.urdf")
     robot = pin.RobotWrapper.BuildFromURDF(
             filename=URDF_PATH,
-            package_dirs=get_package_dirs(PACKAGE_PATH),
+            package_dirs=get_package_dirs(PACKAGE_PATH, REPOSITORY_PATH, URDF_PATH),
             root_joint=root_joint,
         )
     return robot
