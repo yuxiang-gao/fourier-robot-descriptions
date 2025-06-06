@@ -71,7 +71,7 @@ def load_robot_description(
     URDF_PATH = str(REPOSITORY_PATH / "urdf" / f"{description_name}.urdf")
     robot = pin.RobotWrapper.BuildFromURDF(
             filename=URDF_PATH,
-            package_dirs=get_package_dirs(PACKAGE_PATH, REPOSITORY_PATH, URDF_PATH),
+            package_dirs=get_package_dirs(str(PACKAGE_PATH), str(REPOSITORY_PATH), str(URDF_PATH)),
             root_joint=root_joint,
         )
     return robot
