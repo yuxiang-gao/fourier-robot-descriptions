@@ -529,7 +529,7 @@ wheels = [
 
 [[package]]
 name = "fourier-robot-descriptions"
-version = "0.2.1"
+version = "0.2.2"
 source = { editable = "." }
 dependencies = [
     { name = "gitpython" },
@@ -561,7 +561,7 @@ requires-dist = [
     { name = "meshcat", marker = "extra == 'examples'", specifier = ">=0.3.2" },
     { name = "meshcat-shapes", marker = "extra == 'examples'", specifier = ">=0.3.0" },
     { name = "numpy", specifier = ">=1.26.4", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "pin", specifier = ">=3.4.0" },
+    { name = "pin", specifier = ">=3.2.0" },
     { name = "rich", specifier = ">=14.0.0" },
     { name = "tqdm", specifier = ">=4.67.1" },
     { name = "yourdfpy", marker = "extra == 'examples'", specifier = ">=0.0.57" },
