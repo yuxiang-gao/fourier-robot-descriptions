@@ -616,7 +616,7 @@ wheels = [
 
 [[package]]
 name = "fourier-robot-descriptions"
-version = "0.2.0"
+version = "0.2.1"
 source = { editable = "." }
 dependencies = [
     { name = "gitpython" },
@@ -629,6 +629,7 @@ dependencies = [
 examples = [
     { name = "meshcat" },
     { name = "meshcat-shapes" },
+    { name = "yourdfpy" },
 ]
 yourdfpy = [
     { name = "yourdfpy" },
@@ -642,19 +643,20 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "gitpython", specifier = ">=3.1.44", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "meshcat", marker = "extra == 'examples'", specifier = ">=0.3.2", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "meshcat-shapes", marker = "extra == 'examples'", specifier = ">=0.3.0", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "pin", specifier = ">=3.4.0", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "rich", specifier = ">=14.0.0", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "tqdm", specifier = ">=4.67.1", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "yourdfpy", marker = "extra == 'yourdfpy'", specifier = ">=0.0.57", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
+    { name = "gitpython", specifier = ">=3.1.44" },
+    { name = "meshcat", marker = "extra == 'examples'", specifier = ">=0.3.2" },
+    { name = "meshcat-shapes", marker = "extra == 'examples'", specifier = ">=0.3.0" },
+    { name = "pin", specifier = ">=3.4.0" },
+    { name = "rich", specifier = ">=14.0.0" },
+    { name = "tqdm", specifier = ">=4.67.1" },
+    { name = "yourdfpy", marker = "extra == 'examples'", specifier = ">=0.0.57" },
+    { name = "yourdfpy", marker = "extra == 'yourdfpy'", specifier = ">=0.0.57" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "pyright", specifier = ">=1.1.401", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
-    { name = "ruff", specifier = ">=0.11.13", index = "https://pypi.tuna.tsinghua.edu.cn/simple" },
+    { name = "pyright", specifier = ">=1.1.401" },
+    { name = "ruff", specifier = ">=0.11.13" },
 ]
 
 [[package]]
