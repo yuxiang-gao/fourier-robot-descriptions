@@ -57,6 +57,25 @@
     <axis
       xyz="0 0 0" />
   </joint> -->
+
+  <link
+    name="L_hand_wrist_link">
+  </link>
+  <joint
+    name="L_hand_wrist_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L_hand_base_link" />
+    <child
+      link="L_hand_wrist_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
   <link
     name="L_thumb_proximal_yaw_link">
     <inertial>
