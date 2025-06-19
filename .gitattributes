@@ -1,0 +1,1 @@
+src/fourier_robot_descriptions/assets/meshes/* filter=lfs diff=lfs merge=lfs -text
