@@ -60,7 +60,7 @@
     <axis
       xyz="0 0 0" />
   </joint>
-  
+
   <link
     name="L_thumb_proximal_yaw_link">
     <inertial>

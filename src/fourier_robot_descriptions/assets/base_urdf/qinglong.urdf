@@ -567,7 +567,7 @@
       velocity="6.28" />
   </joint>
 
-  
+
 
   <link name ="right_end_effector_link" >
     <inertial>

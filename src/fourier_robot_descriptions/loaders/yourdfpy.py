@@ -20,7 +20,7 @@ except ModuleNotFoundError as e:
 
 def load_robot_description(
     description_name: str,
-    commit: Optional[str] = None,
+    commit: str | None = None,
 ) -> yourdfpy.URDF:
     """Load a robot description in yourdfpy.
 
@@ -32,5 +32,5 @@ def load_robot_description(
     Returns:
         Robot model for yourdfpy.
     """
-    URDF_PATH = str(PACKAGE_PATH/ f"{description_name}.urdf")
+    URDF_PATH = str(PACKAGE_PATH / f"{description_name}.urdf")
     return yourdfpy.URDF.load(URDF_PATH, mesh_dir=PACKAGE_PATH)

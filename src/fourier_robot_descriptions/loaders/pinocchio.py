@@ -12,6 +12,7 @@ from typing import Optional, Union
 
 import pinocchio as pin
 
+from fourier_robot_descriptions import list_descriptions
 from fourier_robot_descriptions.fourier import PACKAGE_PATH, REPOSITORY_PATH
 
 
@@ -71,11 +72,13 @@ def load_robot_description(
     URDF_PATH = str(REPOSITORY_PATH / "urdf" / f"{description_name}.urdf")
     try:
         robot = pin.RobotWrapper.BuildFromURDF(
-                filename=URDF_PATH,
-                package_dirs=get_package_dirs(str(PACKAGE_PATH), str(REPOSITORY_PATH), str(URDF_PATH)),
-                root_joint=root_joint,
-            )
+            filename=URDF_PATH,
+            package_dirs=get_package_dirs(str(PACKAGE_PATH), str(REPOSITORY_PATH), str(URDF_PATH)),
+            root_joint=root_joint,
+        )
     except Exception as e:
         available_descriptions = list_descriptions()
-        raise ValueError(f"Failed to load robot description {description_name}. Available descriptions: {available_descriptions}") from e
+        raise ValueError(
+            f"Failed to load robot description {description_name}. Available descriptions: {available_descriptions}"
+        ) from e
     return robot

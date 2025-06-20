@@ -32,8 +32,8 @@ class CloneProgressBar(RemoteProgress):
     def update(
         self,
         op_code: int,
-        cur_count: Union[str, float],
-        max_count: Union[str, float, None] = None,
+        cur_count: str | float,
+        max_count: str | float | None = None,
         message: str = "",
     ) -> None:
         """Update progress bar.
@@ -53,7 +53,7 @@ class CloneProgressBar(RemoteProgress):
 def clone_to_directory(
     repo_url: str,
     target_dir: str,
-    commit: Optional[str] = None,
+    commit: str | None = None,
 ) -> Repo:
     """Clone a git repository to a designated directory.
 
@@ -88,7 +88,7 @@ def clone_to_directory(
         try:
             clone.git.checkout(commit)
         except GitCommandError:
-            print(f"Commit {commit} not found, " "let's fetch origin and try again...")
+            print(f"Commit {commit} not found, let's fetch origin and try again...")
             clone.git.fetch("origin")
             clone.git.checkout(commit)
             print(f"Found commit {commit} successfully!")
@@ -96,7 +96,7 @@ def clone_to_directory(
     return clone
 
 
-def clone_to_cache(description_name: str, commit: Optional[str] = None) -> str:
+def clone_to_cache(description_name: str, commit: str | None = None) -> str:
     """Get a local working directory cloned from a remote git repository.
 
     Args:

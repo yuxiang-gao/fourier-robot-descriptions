@@ -7,6 +7,3 @@ Fourier robot descriptions is a collection of robot descriptions for Fourier rob
 ```bash
 pip install fourier-robot-descriptions
 ```
-
-
-

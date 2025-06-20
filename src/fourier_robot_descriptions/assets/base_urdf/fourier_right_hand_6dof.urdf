@@ -684,7 +684,7 @@
     <origin rpy="0 0 0" xyz="0.0385 -0.0015 0" />
   </joint>
 
-  
+
   <link
     name="R_pinky_proximal_link">
     <inertial>

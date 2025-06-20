@@ -6,7 +6,6 @@
 """Git utility functions to clone model repositories."""
 
 from dataclasses import dataclass
-from typing import Dict
 
 
 @dataclass
@@ -24,7 +23,7 @@ class Repository:
     url: str
 
 
-REPOSITORIES: Dict[str, Repository] = {
+REPOSITORIES: dict[str, Repository] = {
     "fourier_grx_descriptions_cn": Repository(
         url="https://gitee.com/FourierIntelligence/wiki-grx-models.git",
         commit="57d720db14d62524e50d8abf7919ab07e0123f08",

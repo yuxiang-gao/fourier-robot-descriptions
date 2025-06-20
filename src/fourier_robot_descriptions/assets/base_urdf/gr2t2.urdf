@@ -35,16 +35,16 @@
       </material>
     </visual>
     <collision name="base_1">
-        <origin 
-          rpy="0 0 0" 
+        <origin
+          rpy="0 0 0"
           xyz="0.0 -0.08 -0.11"/>
         <geometry>
             <sphere radius="0.05"/>
         </geometry>
     </collision>
     <collision name="base_2">
-        <origin 
-        rpy="0 0 0" 
+        <origin
+        rpy="0 0 0"
         xyz="0.0 0.08 -0.11"/>
         <geometry>
             <sphere radius="0.05"/>
@@ -250,8 +250,8 @@
       </material>
     </visual>
     <collision name="head">
-        <origin 
-          rpy="0 0 0" 
+        <origin
+          rpy="0 0 0"
           xyz="0 0 0.11"/>
         <geometry>
             <sphere radius="0.08"/>
@@ -1811,7 +1811,7 @@
       lower="-0.436"
       upper="0.436"
       effort="29.1"
-      velocity="13.61" /> 
+      velocity="13.61" />
   </joint>
   <link
     name="right_foot_pitch_link">
