@@ -117,6 +117,9 @@ def main():
         print(f"Generating combination: {base} + {left} + {right}")
         generate_urdf(base, left, right)
 
+    # copy the base urdf files to the generated directory
+    shutil.copytree(SRC_URDF_DIR, GEN_URDF_DIR, dirs_exist_ok=True)
+
     print("--- URDF Generation Complete ---")
 
 
