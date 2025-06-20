@@ -8,17 +8,30 @@ from pathlib import Path
 CWD = Path(__file__).parent
 
 # Path to the source URDFs
-SRC_URDF_DIR = CWD / "src" / "fourier_robot_descriptions" / "assets" / "urdf"
+SRC_URDF_DIR = CWD / "src" / "fourier_robot_descriptions" / "assets" / "base_urdf"
 
 # Path to the generated URDFs
-GEN_URDF_DIR = SRC_URDF_DIR / "generated"
+GEN_URDF_DIR = CWD / "src" / "fourier_robot_descriptions" / "assets" / "urdf"
 
 # Define the combinations of (base_robot, left_hand, right_hand) to generate.
 # Use None if a hand is not to be attached.
 COMBINATIONS = [
+    ("gr1t1", "fourier_left_hand_6dof", "fourier_right_hand_6dof"),
+    ("gr1t1", "fourier_left_hand_12dof", "fourier_right_hand_12dof"),
+    ("gr1t1", "inspire_left_hand", "inspire_right_hand"),
+    ("gr1t2", "fourier_left_hand_6dof", "fourier_right_hand_6dof"),
+    ("gr1t2", "fourier_left_hand_12dof", "fourier_right_hand_12dof"),
+    ("gr1t2", "inspire_left_hand", "inspire_right_hand"),
     ("gr2t2", "fourier_left_hand_6dof", "fourier_right_hand_6dof"),
     ("gr2t2", "fourier_left_hand_12dof", "fourier_right_hand_12dof"),
     ("gr2t2", "inspire_left_hand", "inspire_right_hand"),
+    ("gr2t2v2", "fourier_left_hand_6dof", "fourier_right_hand_6dof"),
+    ("gr2t2v2", "fourier_left_hand_12dof", "fourier_right_hand_12dof"),
+    ("gr2t2v2", "inspire_left_hand", "inspire_right_hand"),
+    ("gr2t2d", "fourier_left_hand_6dof", "fourier_right_hand_6dof"),
+    ("gr2t2d", "fourier_left_hand_12dof", "fourier_right_hand_12dof"),
+    ("gr2t2d", "inspire_left_hand", "inspire_right_hand"),
+    ("qinglong", "fourier_left_hand_6dof", "fourier_right_hand_6dof"),
 ]
 
 # --- Main Script ---
@@ -72,9 +85,14 @@ def generate_urdf(base_robot_name, left_hand_name, right_hand_name):
     attach_hand(base_root, right_hand_name, "right_end_effector_link", "R_hand_base_joint")
 
     # Write the combined URDF to a new file
-    left_suffix = left_hand_name.replace("fourier_left_hand_", "") if left_hand_name else "noleft"
-    right_suffix = right_hand_name.replace("fourier_right_hand_", "") if right_hand_name else "noright"
-    output_name = f"{base_robot_name}_{left_suffix}_{right_suffix}.urdf"
+    if left_hand_name and right_hand_name and left_hand_name.startswith("fourier"):
+        left_suffix = left_hand_name.replace("fourier_left_hand_", "fourier_hand_")
+    elif left_hand_name and right_hand_name and left_hand_name.startswith("inspire"):
+        left_suffix = left_hand_name.replace("inspire_left_hand", "inspire_hand")
+    else:
+        raise ValueError(f"left_hand{left_hand_name} and right_hand{right_hand_name} names are not recognized.")
+    # right_suffix = right_hand_name.replace("fourier_right_hand_", "") if right_hand_name else "noright"
+    output_name = f"{base_robot_name}_{left_suffix}.urdf"
     output_path = GEN_URDF_DIR / output_name
 
     # Write the file

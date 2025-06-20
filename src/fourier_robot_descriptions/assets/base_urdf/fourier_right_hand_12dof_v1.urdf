@@ -44,19 +44,7 @@
       </geometry>
     </collision>
   </link>
-  <!-- <joint
-    name="R_hand_base_joint"
-    type="fixed">
-    <origin
-      xyz="0 0 -0.021"
-      rpy="0 0 0" />
-    <parent
-      link="right_end_effector_link" />
-    <child
-      link="R_hand_base_link" />
-    <axis
-      xyz="0 0 0" />
-  </joint> -->
+
 
   <link
     name="R_hand_wrist_link">
