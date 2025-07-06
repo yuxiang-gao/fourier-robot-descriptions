@@ -8,6 +8,7 @@
 
 import os
 from importlib import import_module  # type: ignore
+from pathlib import Path
 from typing import Optional, Union
 
 import pinocchio as pin
@@ -16,23 +17,23 @@ from fourier_robot_descriptions import list_descriptions
 from fourier_robot_descriptions.fourier import PACKAGE_PATH, REPOSITORY_PATH
 
 
-def get_package_dirs(PACKAGE_PATH: str, REPOSITORY_PATH: str, URDF_PATH: str) -> list[str]:
+def get_package_dirs(package_path: str, repository_path: str, urdf_path: str) -> list[str]:
     """Get package directories
 
     Args:
-        PACKAGE_PATH: Path to the package directory.
-        REPOSITORY_PATH: Path to the repository directory.
+        package_path: Path to the package directory.
+        repository_path: Path to the repository directory.
         URDF_PATH: Path to the URDF file.
 
     Returns:
         Package directories.
     """
     return [
-        PACKAGE_PATH,
-        REPOSITORY_PATH,
-        os.path.dirname(PACKAGE_PATH),
-        os.path.dirname(REPOSITORY_PATH),
-        os.path.dirname(URDF_PATH),
+        package_path,
+        repository_path,
+        os.path.dirname(package_path),
+        os.path.dirname(repository_path),
+        os.path.dirname(urdf_path),
     ]
 
 
@@ -54,6 +55,7 @@ PinocchioJoint = Union[  # noqa: UP007
 def load_robot_description(
     description_name: str,
     root_joint: PinocchioJoint | None = None,
+    **kwargs,
 ) -> pin.RobotWrapper:
     """Load a robot description in Pinocchio.
 
@@ -68,12 +70,26 @@ def load_robot_description(
     Returns:
         Robot model for Pinocchio.
     """
-    URDF_PATH = str(REPOSITORY_PATH / "urdf" / f"{description_name}.urdf")
+    if isinstance(description_name, tuple):
+        base, left, right = description_name
+        from fourier_robot_descriptions.generate import generate_urdf
+
+        URDF_PATH = generate_urdf(base, left, right)
+        if URDF_PATH is None:
+            raise ValueError(f"Failed to generate URDF for {description_name}")
+        PACKAGE_PATH = URDF_PATH.parent
+    elif isinstance(description_name, Path):
+        URDF_PATH = str(description_name)
+        PACKAGE_PATH = description_name.parent
+    else:
+        URDF_PATH = str(REPOSITORY_PATH / "urdf" / f"{description_name}.urdf")
+        PACKAGE_PATH = REPOSITORY_PATH / "urdf"
     try:
         robot = pin.RobotWrapper.BuildFromURDF(
             filename=URDF_PATH,
             package_dirs=get_package_dirs(str(PACKAGE_PATH), str(REPOSITORY_PATH), str(URDF_PATH)),
             root_joint=root_joint,
+            **kwargs,
         )
     except Exception as e:
         available_descriptions = list_descriptions()
