@@ -54,7 +54,6 @@ PinocchioJoint = Union[  # noqa: UP007
 def load_robot_description(
     description_name: str,
     root_joint: PinocchioJoint | None = None,
-    commit: str | None = None,
 ) -> pin.RobotWrapper:
     """Load a robot description in Pinocchio.
 
